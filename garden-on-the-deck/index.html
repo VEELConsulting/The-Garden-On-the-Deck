@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>The Garden on the Deck</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  color-scheme:light;
+  --vanilla:#F4EBD3; --vanilla-deep:#EADFC2; --ink:#1E2A20; --muted:#6B6A58; --chili:#A3271B; --line:#D9CCAA;
+  --serif:"Cormorant Garamond",Georgia,"Times New Roman",serif;
+  --sans:"Jost","Helvetica Neue",Arial,sans-serif;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--vanilla);color:var(--ink);font-family:var(--sans);font-weight:300;line-height:1.6}
+.wrap{max-width:1240px;margin:0 auto;padding:0 clamp(20px,4vw,56px)}
+header{padding:clamp(48px,9vw,120px) 0 clamp(28px,5vw,56px);text-align:center}
+.mark{font-family:var(--serif);font-weight:400;font-size:clamp(44px,9vw,112px);line-height:.95;letter-spacing:.01em;margin:0}
+.sub{max-width:46ch;margin:22px auto 0;color:var(--muted);font-size:16px}
+.deck{aspect-ratio:21/9;margin-bottom:clamp(32px,5vw,64px)}
+.slot{position:relative;display:block;width:100%;background:var(--vanilla-deep);border:0;padding:0;cursor:pointer;overflow:hidden;font:inherit;color:var(--muted)}
+.slot img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.slot span{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:13px;letter-spacing:.08em}
+.slot:hover{background:#E4D7B5}
+.slot:focus-visible,.tabs button:focus-visible{outline:2px solid var(--chili);outline-offset:3px}
+.slot.has span{display:none}
+nav.tabs{display:flex;justify-content:center;gap:clamp(20px,5vw,56px);padding:18px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.tabs button{background:none;border:0;font:inherit;font-weight:400;font-size:15px;letter-spacing:.06em;color:var(--muted);padding:4px 0;cursor:pointer;border-bottom:1px solid transparent}
+.tabs button[aria-pressed="true"]{color:var(--ink);border-bottom-color:var(--chili)}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(28px,4vw,56px) clamp(16px,2.4vw,32px);padding:clamp(32px,5vw,64px) 0}
+.item .slot{aspect-ratio:4/5}
+.item h2{font-family:var(--serif);font-weight:500;font-size:24px;line-height:1.15;margin:16px 0 4px}
+.item p{margin:0;font-size:14.5px;color:var(--muted);max-width:34ch}
+.heat{display:inline-block;margin-top:10px;font-size:13px;letter-spacing:.05em;color:var(--ink)}
+.heat i{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--chili);margin-right:6px;vertical-align:1px}
+.heat.plain i{background:#6F7F4E}
+.heat.mixed i{background:linear-gradient(90deg,var(--chili) 50%,#6F7F4E 50%)}
+.item[hidden]{display:none}
+footer{border-top:1px solid var(--line);padding:40px 0 56px;text-align:center;color:var(--muted);font-size:14px}
+footer b{display:block;font-family:var(--serif);font-weight:400;font-size:22px;color:var(--ink);margin-bottom:6px}
+.empty{text-align:center;color:var(--muted);padding:48px 0 80px;margin:0}
+[hidden]{display:none!important}
+nav.site{display:flex;justify-content:center;gap:32px;padding-top:28px;font-size:14px;letter-spacing:.06em}
+nav.site a{color:var(--muted);text-decoration:none;padding:4px 0;border-bottom:1px solid transparent}
+nav.site a[aria-current="page"]{color:var(--ink);border-bottom-color:var(--chili)}
+nav.site a:focus-visible,.back:focus-visible{outline:2px solid var(--chili);outline-offset:3px}
+.about{display:grid;grid-template-columns:3fr 2fr;gap:clamp(28px,5vw,72px);align-items:center;padding:clamp(32px,5vw,64px) 0}
+.collage{position:relative;aspect-ratio:6/5}
+.collage .slot{position:absolute;width:var(--w);aspect-ratio:var(--r);left:var(--x);top:var(--y);transform:rotate(var(--a));border:8px solid #FBF6E8;box-shadow:0 6px 18px rgba(60,50,20,.18);z-index:var(--z,1)}
+.about h2{font-family:var(--serif);font-weight:400;font-size:clamp(34px,4.5vw,56px);line-height:1.05;margin:0 0 18px}
+.about p.lead{font-family:var(--serif);font-size:clamp(24px,2.8vw,34px);line-height:1.2;color:var(--ink);max-width:22ch;margin:0 0 20px}
+.about p{margin:0 0 14px;max-width:44ch;color:var(--muted);font-size:16px}
+.back{display:inline-block;margin-top:10px;color:var(--ink);text-decoration:none;font-weight:400;border-bottom:1px solid var(--chili)}
+@media(max-width:820px){.about{grid-template-columns:1fr}}
+@media(max-width:980px){.grid{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:700px){.grid{grid-template-columns:repeat(2,1fr)}.deck{aspect-ratio:4/3}}
+@media(max-width:420px){.item h2{font-size:21px}.item p{font-size:13.5px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <nav class="site" aria-label="Pages">
+    <a href="#catalogue" id="nav-cat" aria-current="page">Catalogue</a>
+    <a href="#about" id="nav-about">About</a>
+  </nav>
+  <header>
+    <h1 class="mark">The Garden on the Deck</h1>
+    <p class="sub">Peppers grown in pots, tended by hand, picked at their best. This season's harvest.</p>
+  </header>
+
+  <div id="view-catalogue">
+  <label class="slot deck has" tabindex="0" role="button" aria-label="Replace the deck photo"><img src="images/deck-wide.jpg" alt="The garden on the deck" style="object-position:50% 60%"><span>Add a photo of the deck</span>
+    <input type="file" accept="image/*" hidden>
+  </label>
+
+  <nav class="tabs" aria-label="Filter the harvest">
+    <button aria-pressed="true" data-f="all">All peppers</button>
+    <button aria-pressed="false" data-f="hot">Hot</button>
+    <button aria-pressed="false" data-f="plain">Plain</button>
+  </nav>
+
+  <main class="grid" id="grid"></main>
+    <p class="empty" id="empty" hidden>No hot peppers have been photographed yet. Check back after the next picking.</p>
+  </div>
+
+  <section class="about" id="view-about" hidden>
+    <div class="collage">
+      <label class="slot has" tabindex="0" role="button" aria-label="Replace photo 1" style="--w:46%;--r:5/4;--x:0%;--y:2%;--a:-2deg;--z:2"><img src="images/mama-gardening.jpg" alt="Mama Udofia tending the planters"><span>Add photo</span><input type="file" accept="image/*" hidden></label>
+      <label class="slot has" tabindex="0" role="button" aria-label="Replace photo 2" style="--w:30%;--r:1/1;--x:42%;--y:0%;--a:3deg;--z:3"><img src="images/peony.jpg" alt="A yellow peony in bloom"><span>Add photo</span><input type="file" accept="image/*" hidden></label>
+      <label class="slot has" tabindex="0" role="button" aria-label="Replace photo 3" style="--w:28%;--r:4/5;--x:70%;--y:6%;--a:-1.5deg;--z:2"><img src="images/hand-ripening-bell.jpg" alt="A bell turning from green to red"><span>Add photo</span><input type="file" accept="image/*" hidden></label>
+      <label class="slot has" tabindex="0" role="button" aria-label="Replace photo 4" style="--w:34%;--r:5/4;--x:30%;--y:38%;--a:2deg;--z:4"><img src="images/deck-wide.jpg" alt="The deck garden"><span>Add photo</span><input type="file" accept="image/*" hidden></label>
+      <label class="slot has" tabindex="0" role="button" aria-label="Replace photo 5" style="--w:32%;--r:5/4;--x:0%;--y:58%;--a:2.5deg;--z:3"><img src="images/mama-tending.jpg" alt="Mama Udofia bending to the plants"><span>Add photo</span><input type="file" accept="image/*" hidden></label>
+      <label class="slot has" tabindex="0" role="button" aria-label="Replace photo 6" style="--w:26%;--r:4/5;--x:66%;--y:48%;--a:-3deg;--z:5"><img src="images/hand-bicolour-bell.jpg" alt="A ripening bell held up before the deck garden"><span>Add photo</span><input type="file" accept="image/*" hidden></label>
+    </div>
+    <div>
+      <h2>About the garden</h2>
+      <p class="lead">This garden was cultivated by Mama Udofia.</p>
+      <p>The garden on the deck began with a few pots and a sunny corner. It has grown into a small, devoted harvest of peppers, some that burn bright and some as gentle as summer.</p>
+      <p>Everything here is raised in containers, watered by hand and picked when it is ready. Nothing is hurried, and nothing is wasted.</p>
+      <a class="back" href="#catalogue">View the catalogue</a>
+    </div>
+  </section>
+
+  <footer>
+    <b>The Garden on the Deck</b>
+    Small harvests, grown with care.
+  </footer>
+</div>
+
+<script>
+var peppers=[
+ {n:"Red Bell",d:"Glossy, thick-walled and ripened to full scarlet. Sweet and crisp.",t:"plain",img:"images/red-bell.jpg"},
+ {n:"Red Bell Pair",d:"Two bells picked together, one turned to show its lobes.",t:"plain",img:"images/red-bell-pair.jpg"},
+ {n:"Golden Bell",d:"A pair of yellow bells, mild and honeyed with a bright crunch.",t:"plain",img:"images/golden-bell.jpg"},
+ {n:"Orange Bell",d:"Rounded and sculptural, with warm orange skin and a gentle sweetness.",t:"plain",img:"images/orange-bell.jpg"},
+ {n:"Ripening Bell",d:"Green deepening to red as it matures on the plant.",t:"plain",img:"images/ripening-bell.jpg"},
+ {n:"Bell Quartet",d:"Four bells at the turning point, from green shoulders to scarlet.",t:"plain",img:"images/bell-quartet.jpg"},
+ {n:"Baby Chili",d:"A small, tapered chili, glossy and fiery, ripened to deep red.",t:"hot",img:"images/mini-sweet.jpg"},
+ {n:"Baby Chili Harvest",d:"A heap of red and orange baby chilis from a single picking.",t:"hot",img:"images/mini-sweet-harvest.jpg"},
+ {n:"Baby Chili Spread",d:"Each chili given its own space, from deep red to bright orange.",t:"hot",img:"images/mini-sweet-spread.jpg"},
+ {n:"Mixed Harvest",d:"Sweet bells in orange, red and yellow among the baby chilis. A day's picking.",t:"mixed",img:"images/mixed-harvest.jpg"},
+ {n:"Red Baby Chili",d:"One small, glossy chili, ripe to deep red.",t:"hot",img:"images/red-mini.jpg"},
+ {n:"Little Ripening Bell",d:"A petite bell with a green blush still fading to red.",t:"plain",img:"images/little-ripening-bell.jpg"}
+];
+var grid=document.getElementById("grid");
+function wire(slot){
+  var inp=slot.querySelector("input");
+  slot.addEventListener("keydown",function(e){if(e.key==="Enter"||e.key===" "){e.preventDefault();inp.click();}});
+  inp.addEventListener("change",function(){
+    var f=inp.files&&inp.files[0]; if(!f)return;
+    var r=new FileReader();
+    r.onload=function(){
+      var old=slot.querySelector("img"); if(old)old.remove();
+      var im=new Image(); im.src=r.result; im.alt=slot.getAttribute("aria-label")||"";
+      slot.insertBefore(im,slot.firstChild); slot.classList.add("has");
+    };
+    r.readAsDataURL(f);
+  });
+}
+peppers.forEach(function(p){
+  var a=document.createElement("article"); a.className="item"; a.dataset.t=p.t;
+  a.innerHTML='<label class="slot has" tabindex="0" role="button" aria-label="Replace photo of '+p.n+'"><img src="'+p.img+'" alt="'+p.n+'" loading="lazy"><span>Add photo</span><input type="file" accept="image/*" hidden></label>'
+   +'<h2>'+p.n+'</h2><p>'+p.d+'</p><span class="heat '+p.t+'"><i></i>'+({hot:"Hot",plain:"Plain",mixed:"Hot and plain"}[p.t])+'</span>';
+  grid.appendChild(a);
+});
+document.querySelectorAll(".slot").forEach(wire);
+document.querySelectorAll(".tabs button").forEach(function(b){
+  b.addEventListener("click",function(){
+    document.querySelectorAll(".tabs button").forEach(function(x){x.setAttribute("aria-pressed",x===b)});
+    var shown=0;document.querySelectorAll(".item").forEach(function(i){i.hidden=(b.dataset.f!=="all"&&i.dataset.t!==b.dataset.f&&i.dataset.t!=="mixed");if(!i.hidden)shown++;});document.getElementById("empty").hidden=shown>0;
+  });
+});
+function route(){
+  var about=location.hash==="#about";
+  document.getElementById("view-catalogue").hidden=about;
+  document.getElementById("view-about").hidden=!about;
+  var c=document.getElementById("nav-cat"),a=document.getElementById("nav-about");
+  if(about){a.setAttribute("aria-current","page");c.removeAttribute("aria-current");}
+  else{c.setAttribute("aria-current","page");a.removeAttribute("aria-current");}
+  window.scrollTo(0,0);
+}
+window.addEventListener("hashchange",route);
+route();
+</script>
+</body>
+</html>
