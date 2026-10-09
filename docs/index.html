@@ -24,14 +24,11 @@ header{padding:clamp(48px,9vw,120px) 0 clamp(28px,5vw,56px);text-align:center}
 .mark{font-family:var(--serif);font-weight:400;font-size:clamp(44px,9vw,112px);line-height:.95;letter-spacing:.01em;margin:0}
 .sub{max-width:46ch;margin:22px auto 0;color:var(--muted);font-size:16px}
 .deck{aspect-ratio:21/9;margin-bottom:clamp(32px,5vw,64px)}
-.slot{position:relative;display:block;width:100%;background:var(--vanilla-deep);border:0;padding:0;cursor:pointer;overflow:hidden;font:inherit;color:var(--muted)}
+.slot{position:relative;display:block;width:100%;background:var(--vanilla-deep);border:0;padding:0;overflow:hidden;font:inherit;color:var(--muted)}
 .slot img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.slot span{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:13px;letter-spacing:.08em}
-.slot:hover{background:#E4D7B5}
-.slot:focus-visible,.tabs button:focus-visible{outline:2px solid var(--chili);outline-offset:3px}
-.slot.has span{display:none}
+.tabs button:focus-visible{outline:2px solid var(--chili);outline-offset:3px}
 nav.tabs{display:flex;justify-content:center;gap:clamp(20px,5vw,56px);padding:18px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
-.tabs button{background:none;border:0;font:inherit;font-weight:400;font-size:15px;letter-spacing:.06em;color:var(--muted);padding:4px 0;cursor:pointer;border-bottom:1px solid transparent}
+.tabs button{background:none;border:0;font:inherit;font-weight:400;font-size:15px;letter-spacing:.06em;color:var(--muted);padding:4px 0;border-bottom:1px solid transparent}
 .tabs button[aria-pressed="true"]{color:var(--ink);border-bottom-color:var(--chili)}
 .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(28px,4vw,56px) clamp(16px,2.4vw,32px);padding:clamp(32px,5vw,64px) 0}
 .item .slot{aspect-ratio:4/5}
@@ -75,9 +72,7 @@ nav.site a:focus-visible,.back:focus-visible{outline:2px solid var(--chili);outl
   </header>
 
   <div id="view-catalogue">
-  <label class="slot deck has" tabindex="0" role="button" aria-label="Replace the deck photo"><img src="images/deck-wide.jpg" alt="The garden on the deck" style="object-position:50% 60%"><span>Add a photo of the deck</span>
-    <input type="file" accept="image/*" hidden>
-  </label>
+  <div class="slot deck has"><img src="images/deck-wide.jpg" alt="The garden on the deck" style="object-position:50% 60%"></div>
 
   <nav class="tabs" aria-label="Filter the harvest">
     <button aria-pressed="true" data-f="all">All peppers</button>
@@ -91,12 +86,12 @@ nav.site a:focus-visible,.back:focus-visible{outline:2px solid var(--chili);outl
 
   <section class="about" id="view-about" hidden>
     <div class="collage">
-      <label class="slot has" tabindex="0" role="button" aria-label="Replace photo 1" style="--w:46%;--r:5/4;--x:0%;--y:2%;--a:-2deg;--z:2"><img src="images/mama-gardening.jpg" alt="Mama Udofia tending the planters"><span>Add photo</span><input type="file" accept="image/*" hidden></label>
-      <label class="slot has" tabindex="0" role="button" aria-label="Replace photo 2" style="--w:30%;--r:1/1;--x:42%;--y:0%;--a:3deg;--z:3"><img src="images/peony.jpg" alt="A yellow peony in bloom"><span>Add photo</span><input type="file" accept="image/*" hidden></label>
-      <label class="slot has" tabindex="0" role="button" aria-label="Replace photo 3" style="--w:28%;--r:4/5;--x:70%;--y:6%;--a:-1.5deg;--z:2"><img src="images/hand-ripening-bell.jpg" alt="A bell turning from green to red"><span>Add photo</span><input type="file" accept="image/*" hidden></label>
-      <label class="slot has" tabindex="0" role="button" aria-label="Replace photo 4" style="--w:34%;--r:5/4;--x:30%;--y:38%;--a:2deg;--z:4"><img src="images/deck-wide.jpg" alt="The deck garden"><span>Add photo</span><input type="file" accept="image/*" hidden></label>
-      <label class="slot has" tabindex="0" role="button" aria-label="Replace photo 5" style="--w:32%;--r:5/4;--x:0%;--y:58%;--a:2.5deg;--z:3"><img src="images/mama-tending.jpg" alt="Mama Udofia bending to the plants"><span>Add photo</span><input type="file" accept="image/*" hidden></label>
-      <label class="slot has" tabindex="0" role="button" aria-label="Replace photo 6" style="--w:26%;--r:4/5;--x:66%;--y:48%;--a:-3deg;--z:5"><img src="images/hand-bicolour-bell.jpg" alt="A ripening bell held up before the deck garden"><span>Add photo</span><input type="file" accept="image/*" hidden></label>
+      <div class="slot has" style="--w:46%;--r:5/4;--x:0%;--y:2%;--a:-2deg;--z:2"><img src="images/mama-gardening.jpg" alt="Mama Udofia tending the planters"></div>
+      <div class="slot has" style="--w:30%;--r:1/1;--x:42%;--y:0%;--a:3deg;--z:3"><img src="images/peony.jpg" alt="A yellow peony in bloom"></div>
+      <div class="slot has" style="--w:28%;--r:4/5;--x:70%;--y:6%;--a:-1.5deg;--z:2"><img src="images/hand-ripening-bell.jpg" alt="A bell turning from green to red"></div>
+      <div class="slot has" style="--w:34%;--r:5/4;--x:30%;--y:38%;--a:2deg;--z:4"><img src="images/deck-wide.jpg" alt="The deck garden"></div>
+      <div class="slot has" style="--w:32%;--r:5/4;--x:0%;--y:58%;--a:2.5deg;--z:3"><img src="images/mama-tending.jpg" alt="Mama Udofia bending to the plants"></div>
+      <div class="slot has" style="--w:26%;--r:4/5;--x:66%;--y:48%;--a:-3deg;--z:5"><img src="images/hand-bicolour-bell.jpg" alt="A ripening bell held up before the deck garden"></div>
     </div>
     <div>
       <h2>About the garden</h2>
@@ -129,27 +124,12 @@ var peppers=[
  {n:"Little Ripening Bell",d:"A petite bell with a green blush still fading to red.",t:"plain",img:"images/little-ripening-bell.jpg"}
 ];
 var grid=document.getElementById("grid");
-function wire(slot){
-  var inp=slot.querySelector("input");
-  slot.addEventListener("keydown",function(e){if(e.key==="Enter"||e.key===" "){e.preventDefault();inp.click();}});
-  inp.addEventListener("change",function(){
-    var f=inp.files&&inp.files[0]; if(!f)return;
-    var r=new FileReader();
-    r.onload=function(){
-      var old=slot.querySelector("img"); if(old)old.remove();
-      var im=new Image(); im.src=r.result; im.alt=slot.getAttribute("aria-label")||"";
-      slot.insertBefore(im,slot.firstChild); slot.classList.add("has");
-    };
-    r.readAsDataURL(f);
-  });
-}
 peppers.forEach(function(p){
   var a=document.createElement("article"); a.className="item"; a.dataset.t=p.t;
-  a.innerHTML='<label class="slot has" tabindex="0" role="button" aria-label="Replace photo of '+p.n+'"><img src="'+p.img+'" alt="'+p.n+'" loading="lazy"><span>Add photo</span><input type="file" accept="image/*" hidden></label>'
+  a.innerHTML='<div class="slot has"><img src="'+p.img+'" alt="'+p.n+'" loading="lazy"></div>'
    +'<h2>'+p.n+'</h2><p>'+p.d+'</p><span class="heat '+p.t+'"><i></i>'+({hot:"Hot",plain:"Plain",mixed:"Hot and plain"}[p.t])+'</span>';
   grid.appendChild(a);
 });
-document.querySelectorAll(".slot").forEach(wire);
 document.querySelectorAll(".tabs button").forEach(function(b){
   b.addEventListener("click",function(){
     document.querySelectorAll(".tabs button").forEach(function(x){x.setAttribute("aria-pressed",x===b)});
